@@ -6,7 +6,8 @@ import sys
 import unidecode
 from model import RNN
 
-device = "cuda:0"
+device = "cuda:0" if torch.cuda.is_available else "cpu"
+
 
 all_characters = string.printable
 n_characters = len(all_characters)

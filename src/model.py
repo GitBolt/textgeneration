@@ -6,7 +6,7 @@ import random
 import sys
 import unidecode
 
-device = "cuda:0"
+device = "cuda:0" if torch.cuda.is_available else "cpu"
 
 
 class RNN(nn.Module):

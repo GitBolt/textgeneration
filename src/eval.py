@@ -5,7 +5,8 @@ import torch
 all_characters = string.printable
 n_characters = len(all_characters)
 
-device = "cuda:0"
+device = "cuda:0" if torch.cuda.is_available else "cpu"
+
 
 
 def char_tensor(string):
