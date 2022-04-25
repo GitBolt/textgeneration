@@ -18,12 +18,12 @@ file = unidecode.unidecode(open("messages.txt").read())
 class Generator:
     def __init__(self):
         self.chunk_len = 250
-        self.num_epochs = 5000
+        self.num_epochs = 10000
         self.batch_size = 1
         self.print_every = 50
         self.hidden_size = 256
         self.num_layers = 2
-        self.lr = 0.001
+        self.lr = 0.003
 
     def char_tensor(self, string):
         tensor = torch.zeros(len(string)).long()

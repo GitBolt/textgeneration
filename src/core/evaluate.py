@@ -1,6 +1,6 @@
-from model import RNN
 import string
 import torch
+from model import RNN
 
 all_characters = string.printable
 n_characters = len(all_characters)
@@ -15,7 +15,7 @@ def char_tensor(string):
     return tensor
 
 
-def generate(model, initial_str="hey", predict_len=100, temperature=0.85):
+def generate(model, initial_str="amazing", predict_len=100, temperature=0.85):
     hidden, cell = model.init_hidden(batch_size=1)
     initial_input = char_tensor(initial_str)
     predicted = initial_str
