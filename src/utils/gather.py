@@ -2,12 +2,13 @@ import os
 import json
 import time
 import requests
+from dotenv import load_dotenv
 
+load_dotenv()
 
 HEADERS = {
-    "Authorization": "mfa.QSFVCNOBC4khEF2u5Sat8FzyyccA3xT4o4TjRAYJGEH77zPfHPCeLzQs4xdoaCt4wz6n8NmC_kQB2MsF5fja"
+    "Authorization": os.getenv("TOKEN")
 }
-
 
 class Gather:
     def __init__(self, guild_id, channel_id, author_id):
@@ -51,5 +52,5 @@ class Gather:
         file.write(text)
         file.close()
 
-gather = Gather(870330763772563476, 870330763772563481, 791950104680071188)
+gather = Gather(807140294276415510, 963346820443041842, 791950104680071188)
 gather.fetch(50, default_offset=500)
