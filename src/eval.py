@@ -5,8 +5,7 @@ import torch
 all_characters = string.printable
 n_characters = len(all_characters)
 
-device = "cuda:0" if torch.cuda.is_available else "cpu"
-
+device = "cuda:0" if torch.cuda.is_available() else "cpu"
 
 
 def char_tensor(string):
@@ -49,3 +48,7 @@ def generate(initial_str="hey", predict_len=100, temperature=0.85):
         last_char = char_tensor(predicted_char)
 
     return predicted
+
+
+while True:
+    print(generate(input("Enter starting text: ")))
