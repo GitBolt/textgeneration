@@ -23,7 +23,7 @@ def generate(initial_str="hey", predict_len=100, temperature=0.85):
         n_characters
     ).to(device)
 
-    model.load_state_dict(torch.load("data/data.pt"))
+    model.load_state_dict(torch.load("data/data.pt", map_location=torch.device(device)))
     model.eval()
 
     hidden, cell = model.init_hidden(batch_size=1)
