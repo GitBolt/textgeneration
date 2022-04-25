@@ -1,0 +1,7 @@
+__pycache__
+data/
+messages.txt
+backup.txt
+env
+.env
+data.pt
