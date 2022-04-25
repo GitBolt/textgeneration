@@ -1,6 +1,6 @@
 import string
 import torch
-from model import RNN
+from core.model import RNN
 
 all_characters = string.printable
 n_characters = len(all_characters)
