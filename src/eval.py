@@ -48,7 +48,3 @@ def generate(initial_str="hey", predict_len=100, temperature=0.85):
         last_char = char_tensor(predicted_char)
 
     return predicted
-
-
-while True:
-    print(generate(input("Enter starting text: ")))
