@@ -11,7 +11,7 @@ device = "cuda:0"
 all_characters = string.printable
 n_characters = len(all_characters)
 
-file = unidecode.unidecode(open("messages.txt").read())
+file = unidecode.unidecode(open("messages2.txt").read())
 
 
 class Generator:

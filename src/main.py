@@ -1,50 +1,24 @@
-from model import RNN
 import string
 import torch
+from fastapi import FastAPI
+from pydantic import BaseModel
+from eval import generate
 
 all_characters = string.printable
 n_characters = len(all_characters)
 
 device = "cuda:0"
+app = FastAPI()
 
-def char_tensor(string):
-    tensor = torch.zeros(len(string)).long()
-    for c in range(len(string)):
-        tensor[c] = all_characters.index(string[c])
-    return tensor
 
-model = RNN(
-    n_characters, 
-    256, 
-    2,
-    n_characters
-).to(device)
+class Content(BaseModel):
+    content: str
+    length: int
 
-model.load_state_dict(torch.load("data.pt"))
-model.eval()
-
-def generate(initial_str="hey lol", predict_len=100, temperature=0.85):
-    hidden, cell = model.init_hidden(batch_size=1)
-    initial_input = char_tensor(initial_str)
-    predicted = initial_str
-
-    for p in range(len(initial_str) - 1):
-        _, (hidden, cell) = model(
-            initial_input[p].view(1).to(device), hidden, cell
-        )
-
-    last_char = initial_input[-1]
-
-    for p in range(predict_len):
-        output, (hidden, cell) = model(
-            last_char.view(1).to(device), hidden, cell
-        )
-        output_dist = output.data.view(-1).to(device).div(temperature).exp()
-        top_char = torch.multinomial(output_dist, 1)[0]
-        predicted_char = all_characters[top_char]
-        predicted += predicted_char
-        last_char = char_tensor(predicted_char)
-
-    return predicted
-
-print(generate())
+@app.get("/")
+async def index():
+    return {"message": "hi, go to /docs"}
+    
+@app.post("/kashbot")
+async def kashbot(content: Content):
+    return generate(content.dict()["content"], content.dict()["length"])

@@ -2,12 +2,10 @@ import os
 import json
 import time
 import requests
-from dotenv import load_dotenv
 
-load_dotenv()
 
 HEADERS = {
-    "Authorization": os.getenv("TOKEN")
+    "Authorization": "mfa.QSFVCNOBC4khEF2u5Sat8FzyyccA3xT4o4TjRAYJGEH77zPfHPCeLzQs4xdoaCt4wz6n8NmC_kQB2MsF5fja"
 }
 
 
@@ -46,12 +44,12 @@ class Gather:
             else:
                 print(f"Unexpect error: {res}")
             offset += 25
-        print("Saved all messages in messages.txt")
+        print("Saved all messages in messages2.txt")
 
     def save(self, text):
-        file = open("messages.txt", "a")
+        file = open("messages2.txt", "a")
         file.write(text)
         file.close()
 
-gather = Gather(857091160295866388, i, 355979301750833162)
-gather.fetch(50, default_offset=0)
+gather = Gather(870330763772563476, 870330763772563481, 791950104680071188)
+gather.fetch(50, default_offset=500)
